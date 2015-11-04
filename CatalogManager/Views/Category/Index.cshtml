@@ -25,7 +25,7 @@
                 }
 
                 <div class="col-md-4 product">
-                    @Html.ActionLink("Add Product", "Create", "Product", new { @ParentCategoryName = Model.Name }, null)
+                    @Html.ActionLink("Add Product", "Create", "Product", new { @ParentCategoryName = Model.Name }, new { @class = "btn btn-primary btn-large" })
 
                 </div>
             }
@@ -41,7 +41,7 @@
                     @Html.Partial("_CategoryPartial", Model.AllCategories[subCategory], ViewData)
                 }
                 <div class="row category">
-                    @Html.ActionLink("Add SubCategory", "Create", "Category", new { @ParentCategoryName = Model.Name }, null)
+                    @Html.ActionLink("Add SubCategory", "Create", "Category", new { @ParentCategoryName = Model.Name }, new { @class = "btn btn-primary btn-large" })
                 </div>
             }
 

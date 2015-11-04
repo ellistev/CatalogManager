@@ -4,8 +4,8 @@
     <h2>@Model.Name</h2>
     <p>@Model.Description</p>
     <p>$@Model.Price</p>
-    @Html.ActionLink("View", "Index", "Product", new { name = @Model.Name }, null)
-    @Html.ActionLink("Edit", "Edit", "Product", new { name = @Model.Name, @ParentCategoryName = ViewBag.ParentCategoryName}, null)
-    @Html.ActionLink("Delete", "Delete", "Product", new { name = @Model.Name, @pageType = @ViewData["PageType"], @ParentCategoryName = ViewBag.ParentCategoryName }, null)
+    @Html.ActionLink("View", "Index", "Product", new { name = @Model.Name }, new { @class = "btn btn-primary btn-large" })
+    @Html.ActionLink("Edit", "Edit", "Product", new { name = @Model.Name, @ParentCategoryName = ViewBag.ParentCategoryName }, new { @class = "btn btn-primary btn-large" })
+    @Html.ActionLink("Delete", "Delete", "Product", new { name = @Model.Name, @pageType = @ViewData["PageType"], @ParentCategoryName = ViewBag.ParentCategoryName }, new { @class = "btn btn-primary btn-large" })
     
 </div>

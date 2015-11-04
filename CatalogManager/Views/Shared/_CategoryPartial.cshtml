@@ -3,8 +3,8 @@
 
 <div class="row category">
     <h2>@Model.Name</h2>
-    @Html.ActionLink("View", "Index", "Category", new { name = @Model.Name }, null)
-    @Html.ActionLink("Edit", "Edit", "Category", new { name = @Model.Name, @pageType = @ViewData["PageType"] }, null)
-    @Html.ActionLink("Delete", "Delete", "Category", new { name = @Model.Name, @pageType = @ViewData["PageType"] }, null)
+    @Html.ActionLink("View", "Index", "Category", new { name = @Model.Name }, new { @class = "btn btn-primary btn-large" })
+    @Html.ActionLink("Edit", "Edit", "Category", new { name = @Model.Name, @pageType = @ViewData["PageType"] }, new { @class = "btn btn-primary btn-large" })
+    @Html.ActionLink("Delete", "Delete", "Category", new { name = @Model.Name, @pageType = @ViewData["PageType"] }, new { @class = "btn btn-primary btn-large" })
 </div>
 
