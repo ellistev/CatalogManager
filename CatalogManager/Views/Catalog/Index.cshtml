@@ -2,9 +2,10 @@
 @model CatalogManager.Models.Catalog
 @{
     ViewBag.Title = "Catalog";
+    ViewData["PageType"] = "Main";
 }
 
-@Html.Hidden("pageType", "main")
+
 <div class="jumbotron">
     <h1>Catalog Manager</h1>
     <p class="lead">Manage Best Buy's Catalog, With Style!</p>
@@ -16,7 +17,7 @@
         @if(Model.Categories != null){
              foreach (string category in Model.MainCategories)
              {
-                 @Html.Partial("_CategoryPartial", Model.Categories[category])
+                 @Html.Partial("_CategoryPartial", Model.Categories[category], ViewData)
              }
         }
 

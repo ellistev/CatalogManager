@@ -23,7 +23,7 @@ namespace CatalogManager.Controllers
         // GET: /Category/
         public ActionResult Index(string name)
         {
-            Category category = categories[name];
+            Category category = allCategories[name];
             return View(category);
         }
 
@@ -95,8 +95,9 @@ namespace CatalogManager.Controllers
 
         //
         // GET: /Category/Delete/5
-        public ActionResult Delete(string name)
+        public ActionResult Delete(string name, string pageType)
         {
+
 
             return Redirect(System.Web.HttpContext.Current.Request.UrlReferrer.ToString());
             
