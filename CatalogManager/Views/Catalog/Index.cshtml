@@ -1,0 +1,28 @@
+﻿@model CatalogManager.Models.Catalog
+@{
+    ViewBag.Title = "Catalog";
+}
+
+
+<div class="jumbotron">
+    <h1>Catalog Manager</h1>
+    <p class="lead">Manage Best Buy's Catalog, With Style!</p>
+    <p><a href="http://asp.net" class="btn btn-primary btn-large">Learn more &raquo;</a></p>
+</div>
+
+<div class="row">
+    <div class="col-md-12 categories">
+        @if(Model.Categories != null){
+             for (var i = 0; i < Model.Categories.Count; i++)
+                {
+                    @Html.Partial("_CategoryPartial", Model.Categories[i])
+                }          
+        }
+
+        <div class="row">
+            @Html.ActionLink("Add Category", "CreateCategory","Catalog", null, null) 
+        </div>
+    </div>
+ 
+
+</div>
