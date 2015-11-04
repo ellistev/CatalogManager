@@ -1,23 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.Specialized;
-using System.Linq;
-using System.Web;
+﻿using System.Collections.Generic;
 
 namespace CatalogManager.Models
 {
     public class Catalog
     {
+        public Dictionary<string, Category> Categories;
         //public List<Category> Categories;
         public List<string> MainCategories;
-        public Dictionary<string, Category> Categories;
         public Dictionary<string, Product> Products;
 
         public Catalog()
         {
-            this.MainCategories = new List<string>();
-            this.Categories = CategoriesSingleton.Instance;
-            this.Products = ProductsSingleton.Instance;
+            MainCategories = new List<string>();
+            Categories = CategoriesSingleton.Instance;
+            Products = ProductsSingleton.Instance;
         }
     }
 }

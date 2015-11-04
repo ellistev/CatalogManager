@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using CatalogManager.Models;
 
@@ -9,14 +7,13 @@ namespace CatalogManager.Controllers
 {
     public class CategoryController : Controller
     {
-
         public Dictionary<string, Category> allCategories;
         public Catalog catalog;
 
         public CategoryController()
         {
-            this.catalog = CatalogSingleton.Instance;
-            this.allCategories = CategoriesSingleton.Instance;
+            catalog = CatalogSingleton.Instance;
+            allCategories = CategoriesSingleton.Instance;
         }
 
         //
@@ -24,7 +21,7 @@ namespace CatalogManager.Controllers
         public ActionResult Index(string name)
         {
             ViewBag.PreviousUrl = System.Web.HttpContext.Current.Request.UrlReferrer;
-            Category category = allCategories[name];
+            var category = allCategories[name];
             return View(category);
         }
 
@@ -54,7 +51,8 @@ namespace CatalogManager.Controllers
                 //get products category parent
                 var parentCategoryName = collection["ParentCategoryName"];
                 var parentCategory = allCategories[parentCategoryName];
-                allCategories.Add(collection["Name"], new Category{
+                allCategories.Add(collection["Name"], new Category
+                {
                     Name = collection["Name"]
                 });
                 parentCategory.SubCategories.Add(collection["Name"]);
@@ -67,13 +65,10 @@ namespace CatalogManager.Controllers
             }
         }
 
-
-
         //
         // GET: /Category/Edit/5
         public ActionResult Edit(string name)
         {
-
             var category = allCategories[name];
             ViewBag.PreviousUrl = System.Web.HttpContext.Current.Request.UrlReferrer;
             return View(category);
@@ -100,8 +95,7 @@ namespace CatalogManager.Controllers
                 }
                 else if (pageType == "Category")
                 {
-
-                    foreach (KeyValuePair<string, Category> entry in allCategories)
+                    foreach (var entry in allCategories)
                     {
                         if (entry.Value.SubCategories.Contains(collection["originalCategoryName"]))
                         {
@@ -109,13 +103,10 @@ namespace CatalogManager.Controllers
                             entry.Value.SubCategories.Add(name);
                         }
                     }
-
                 }
 
 
-
                 return Redirect(collection["PreviousUrl"]);
-                
             }
             catch
             {
@@ -127,7 +118,6 @@ namespace CatalogManager.Controllers
         // GET: /Category/Delete/Name/PageType
         public ActionResult Delete(string name, string pageType)
         {
-
             if (pageType == "Main")
             {
                 allCategories.Remove(name);
@@ -135,8 +125,7 @@ namespace CatalogManager.Controllers
             }
             else if (pageType == "Category")
             {
-                
-                foreach (KeyValuePair<string, Category> entry in allCategories)
+                foreach (var entry in allCategories)
                 {
                     if (entry.Value.SubCategories.Contains(name))
                     {
@@ -144,11 +133,9 @@ namespace CatalogManager.Controllers
                     }
                 }
                 allCategories.Remove(name);
-                
             }
 
             return Redirect(System.Web.HttpContext.Current.Request.UrlReferrer.ToString());
-            
         }
 
         //

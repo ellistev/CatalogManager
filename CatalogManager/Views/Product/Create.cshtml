@@ -1,18 +1,18 @@
 ﻿@model CatalogManager.Models.Product
 
 
-@using (Html.BeginForm()) 
+@using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
         <h4>Product</h4>
-        <hr />
+        <hr/>
         @Html.ValidationSummary(true)
-        @Html.Hidden("PreviousUrl", (object)ViewBag.PreviousUrl.ToString())
-        @Html.Hidden("ParentCategoryName", (object)ViewBag.ParentCategoryName.ToString(), new { @Name = "ParentCategoryName" })
+        @Html.Hidden("PreviousUrl", (object) ViewBag.PreviousUrl.ToString())
+        @Html.Hidden("ParentCategoryName", (object) ViewBag.ParentCategoryName.ToString(), new {@Name = "ParentCategoryName"})
         <div class="form-group">
-            @Html.LabelFor(model => model.Name, new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.Name, new {@class = "control-label col-md-2"})
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Name)
                 @Html.ValidationMessageFor(model => model.Name)
@@ -20,7 +20,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Description, new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.Description, new {@class = "control-label col-md-2"})
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Description)
                 @Html.ValidationMessageFor(model => model.Description)
@@ -28,7 +28,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Price, new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.Price, new {@class = "control-label col-md-2"})
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Price)
                 @Html.ValidationMessageFor(model => model.Price)
@@ -37,7 +37,7 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <input type="submit" value="Create" class="btn btn-default"/>
             </div>
         </div>
     </div>

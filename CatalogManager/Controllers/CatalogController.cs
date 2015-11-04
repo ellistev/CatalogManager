@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using CatalogManager.Models;
+
 namespace CatalogManager.Controllers
 {
     public class CatalogController : Controller
@@ -13,8 +10,9 @@ namespace CatalogManager.Controllers
 
         public CatalogController()
         {
-            this.catalog = CatalogSingleton.Instance;
+            catalog = CatalogSingleton.Instance;
         }
+
         //
         // GET: /Catalog/
         public ActionResult Index()
@@ -106,4 +104,3 @@ namespace CatalogManager.Controllers
         }
     }
 }
-

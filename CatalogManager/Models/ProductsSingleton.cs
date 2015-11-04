@@ -1,15 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.Collections.Generic;
 
 namespace CatalogManager.Models
 {
     public class ProductsSingleton
     {
         private static Dictionary<string, Product> instance;
-
-        public ProductsSingleton() { }
 
         public static Dictionary<string, Product> Instance
         {

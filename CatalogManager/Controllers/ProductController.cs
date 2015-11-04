@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using CatalogManager.Models;
 
@@ -9,24 +7,22 @@ namespace CatalogManager.Controllers
 {
     public class ProductController : Controller
     {
-
-        public Dictionary<string, Product> allProducts;
         public Dictionary<string, Category> allCategories;
+        public Dictionary<string, Product> allProducts;
         public Catalog catalog;
 
         public ProductController()
         {
-            this.catalog = CatalogSingleton.Instance;
-            this.allProducts = ProductsSingleton.Instance;
-            this.allCategories = CategoriesSingleton.Instance;
+            catalog = CatalogSingleton.Instance;
+            allProducts = ProductsSingleton.Instance;
+            allCategories = CategoriesSingleton.Instance;
         }
-
 
         //
         // GET: /Product/
         public ActionResult Index(string name)
         {
-            Product category = allProducts[name];
+            var category = allProducts[name];
             return View(category);
         }
 
@@ -61,7 +57,6 @@ namespace CatalogManager.Controllers
                     Name = collection["Name"],
                     Price = collection["Price"],
                     Description = collection["Description"]
-
                 });
                 parentCategory.Products.Add(collection["Name"]);
 
@@ -98,7 +93,7 @@ namespace CatalogManager.Controllers
                 allProducts.Remove(collection["originalProductName"]);
                 allProducts.Add(name, originalProduct);
 
-                foreach (KeyValuePair<string, Category> entry in allCategories)
+                foreach (var entry in allCategories)
                 {
                     if (entry.Value.Products.Contains(collection["originalProductName"]))
                     {
@@ -108,7 +103,6 @@ namespace CatalogManager.Controllers
                 }
 
                 return Redirect(collection["PreviousUrl"]);
-
             }
             catch
             {
@@ -120,15 +114,13 @@ namespace CatalogManager.Controllers
         // GET: /Category/Delete/Name/PageType
         public ActionResult Delete(string name, string pageType)
         {
-
             if (pageType == "Main")
             {
                 allProducts.Remove(name);
             }
             else if (pageType == "Category")
             {
-
-                foreach (KeyValuePair<string, Category> entry in allCategories)
+                foreach (var entry in allCategories)
                 {
                     if (entry.Value.Products.Contains(name))
                     {
@@ -136,11 +128,9 @@ namespace CatalogManager.Controllers
                     }
                 }
                 allProducts.Remove(name);
-
             }
 
             return Redirect(System.Web.HttpContext.Current.Request.UrlReferrer.ToString());
-
         }
 
         //

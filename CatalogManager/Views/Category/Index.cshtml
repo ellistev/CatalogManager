@@ -8,9 +8,9 @@
 
 <div class="jumbotron">
     <h1>Category: @Model.Name</h1>
-    @Html.Hidden("PreviousUrl", (object)ViewBag.PreviousUrl.ToString())
-    @Html.Hidden("ParentCategoryName", @Model.Name, new { @Name = "ParentCategoryName" })
-    
+    @Html.Hidden("PreviousUrl", (object) ViewBag.PreviousUrl.ToString())
+    @Html.Hidden("ParentCategoryName", @Model.Name, new {@Name = "ParentCategoryName"})
+
 </div>
 
 <div class="row">
@@ -18,14 +18,13 @@
         <div class="row products">
             @if (Model.Products != null)
             {
-
-                foreach (string product in Model.Products)
+                foreach (var product in Model.Products)
                 {
                     @Html.Partial("_ProductPartial", Model.AllProducts[product])
                 }
 
                 <div class="col-md-4 product">
-                    @Html.ActionLink("Add Product", "Create", "Product", new { @ParentCategoryName = Model.Name }, new { @class = "btn btn-primary btn-large" })
+                    @Html.ActionLink("Add Product", "Create", "Product", new {@ParentCategoryName = Model.Name}, new {@class = "btn btn-primary btn-large"})
 
                 </div>
             }
@@ -35,13 +34,12 @@
         <div class="row categories">
             @if (Model.SubCategories != null)
             {
-
-                foreach (string subCategory in Model.SubCategories)
+                foreach (var subCategory in Model.SubCategories)
                 {
                     @Html.Partial("_CategoryPartial", Model.AllCategories[subCategory], ViewData)
                 }
                 <div class="row category">
-                    @Html.ActionLink("Add SubCategory", "Create", "Category", new { @ParentCategoryName = Model.Name }, new { @class = "btn btn-primary btn-large" })
+                    @Html.ActionLink("Add SubCategory", "Create", "Category", new {@ParentCategoryName = Model.Name}, new {@class = "btn btn-primary btn-large"})
                 </div>
             }
 

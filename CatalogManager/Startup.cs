@@ -1,7 +1,9 @@
-﻿using Microsoft.Owin;
+﻿using CatalogManager;
+using Microsoft.Owin;
 using Owin;
 
-[assembly: OwinStartupAttribute(typeof(CatalogManager.Startup))]
+[assembly: OwinStartup(typeof (Startup))]
+
 namespace CatalogManager
 {
     public partial class Startup

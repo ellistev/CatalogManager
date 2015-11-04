@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.Collections.Generic;
 
 namespace CatalogManager.Models
 {
@@ -9,15 +6,13 @@ namespace CatalogManager.Models
     {
         private static Dictionary<string, Category> instance;
 
-        public CategoriesSingleton() { }
-
         public static Dictionary<string, Category> Instance
         {
             get
             {
                 if (instance == null)
                 {
-                    instance = new  Dictionary<string, Category>();
+                    instance = new Dictionary<string, Category>();
                 }
                 return instance;
             }
