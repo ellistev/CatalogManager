@@ -3,6 +3,7 @@
 
 <div class="row selected">
     <h2>@Model.Name</h2>
+    @Html.ActionLink("View", "Index", "Category", new { name = @Model.Name }, null)
     @Html.ActionLink("Edit", "Edit", "Category", new { name = @Model.Name }, null)
 </div>
 

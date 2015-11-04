@@ -18,11 +18,13 @@ namespace CatalogManager.Controllers
             this.catalog = CatalogSingleton.Instance;
             this.categories = CategoriesSingleton.Instance;
         }
+
         //
         // GET: /Category/
-        public ActionResult Index()
+        public ActionResult Index(string name)
         {
-            return View();
+            Category category = categories[name];
+            return View(category);
         }
 
         //

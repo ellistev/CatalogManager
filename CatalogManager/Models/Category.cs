@@ -10,11 +10,15 @@ namespace CatalogManager.Models
         public String Name;
         public List<string> Products;
         public List<string> SubCategories;
+        public Dictionary<string, Category> AllCategories;
+        public Dictionary<string, Product> AllProducts;
 
         public Category()
         {
             this.Products = new List<string>();
             this.SubCategories = new List<string>();
+            this.AllCategories = CategoriesSingleton.Instance;
+            this.AllProducts = ProductsSingleton.Instance;
         }
     }
 }

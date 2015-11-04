@@ -5,9 +5,9 @@
 
 
 <div class="jumbotron">
-    <h1>Catalog Manager</h1>
-    <p class="lead">Manage Best Buy's Catalog, With Style!</p>
-    <p><a href="http://asp.net" class="btn btn-primary btn-large">Learn more &raquo;</a></p>
+    <h1>Category: @Model.Name</h1>
+    
+    
 </div>
 
 <div class="row">
@@ -15,9 +15,10 @@
         <div class="row">
             @if (Model.Products != null)
             {
-                for (var i = 0; i < Model.Products.Count; i++)
+
+                foreach (string product in Model.Products)
                 {
-                    @Html.Partial("_ProductPartial", Model.Products[i])
+                    @Html.Partial("_ProductPartial", Model.AllProducts[product])
                 }
 
                 <div class="col-md-4 product">
@@ -30,11 +31,11 @@
         <div class="row subcategories">
             @if (Model.SubCategories != null)
             {
-                for (var i = 0; i < Model.SubCategories.Count; i++)
-                {
-                    @Html.Partial("_SubCategoryPartial", Model.SubCategories[i])
-                }
 
+                foreach (string subCategory in Model.SubCategories)
+                {
+                    @Html.Partial("_SubCategoryPartial", Model.AllCategories[subCategory])
+                }                
                 <div class="row subcategory">
                     <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301866">Add Sub-category &raquo;</a></p>
                 </div>
