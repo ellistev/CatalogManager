@@ -14,7 +14,6 @@ namespace CatalogManager.Controllers
 
         CategoryController()
         {
-            this.categories = CategoriesSingleton.Instance;
         }
         //
         // GET: /Category/

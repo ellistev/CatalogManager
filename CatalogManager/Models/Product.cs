@@ -22,6 +22,11 @@ namespace CatalogManager.Models
             get;
         }
 
+        public Product()
+        {
+            
+        }
+
     }
 
 

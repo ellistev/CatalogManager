@@ -10,12 +10,10 @@ namespace CatalogManager.Controllers
     public class CatalogController : Controller
     {
         public Catalog catalog;
-        public Dictionary<string, Category> categories;
 
         public CatalogController()
         {
             this.catalog = CatalogSingleton.Instance;
-            this.categories = CategoriesSingleton.Instance;
         }
         //
         // GET: /Catalog/
@@ -45,12 +43,8 @@ namespace CatalogManager.Controllers
         {
             try
             {
-                catalog.Categories.Add(new Category
-                {
-                    Name = collection["Name"]
-                });
-
-                categories.Add(collection["Name"], new Category
+                catalog.MainCategories.Add(collection["Name"]);
+                catalog.Categories.Add(collection["Name"], new Category
                 {
                     Name = collection["Name"]
                 });
@@ -112,3 +106,4 @@ namespace CatalogManager.Controllers
         }
     }
 }
+

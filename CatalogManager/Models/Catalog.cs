@@ -8,11 +8,16 @@ namespace CatalogManager.Models
 {
     public class Catalog
     {
-        public List<Category> Categories;
+        //public List<Category> Categories;
+        public List<string> MainCategories;
+        public Dictionary<string, Category> Categories;
+        public Dictionary<string, Product> Products;
 
         public Catalog()
         {
-            this.Categories = new List<Category>();
+            this.MainCategories = new List<string>();
+            this.Categories = CategoriesSingleton.Instance;
+            this.Products = ProductsSingleton.Instance;
         }
     }
 }
