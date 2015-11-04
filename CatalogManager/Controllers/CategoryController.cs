@@ -3,11 +3,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using CatalogManager.Models;
 
 namespace CatalogManager.Controllers
 {
     public class CategoryController : Controller
     {
+
+        public Dictionary<string, Category> categories;
+
+        CategoryController()
+        {
+            this.categories = CategoriesSingleton.Instance;
+        }
         //
         // GET: /Category/
         public ActionResult Index()
@@ -44,6 +52,14 @@ namespace CatalogManager.Controllers
             {
                 return View();
             }
+        }
+
+        //
+        // GET: /Category/Edit/5
+        public ActionResult Edit(string name)
+        {
+            var category = categories["name"];
+            return View(category);
         }
 
         //

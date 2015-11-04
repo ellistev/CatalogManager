@@ -3,6 +3,6 @@
 
 <div class="row selected">
     <h2>@Model.Name</h2>
-    <a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301865">Edit &raquo;</a>
+    @Html.ActionLink("Edit", "Edit", "Category", new { name = @Model.Name })
 </div>
 

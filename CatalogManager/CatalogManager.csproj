@@ -165,6 +165,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Catalog.cs" />
+    <Compile Include="Models\CategoriesSingleton.cs" />
     <Compile Include="Models\CatalogSingleton.cs" />
     <Compile Include="Models\Category.cs" />
     <Compile Include="Models\Product.cs" />
@@ -213,6 +214,7 @@
     <Content Include="Views\Category\Create.cshtml" />
     <Content Include="Views\Catalog\CreateCategory.cshtml" />
     <Content Include="Views\Category\Index.cshtml" />
+    <Content Include="Views\Category\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

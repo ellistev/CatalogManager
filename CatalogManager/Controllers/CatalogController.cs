@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -9,11 +10,12 @@ namespace CatalogManager.Controllers
     public class CatalogController : Controller
     {
         public Catalog catalog;
-
+        public Dictionary<string, Category> categories;
 
         public CatalogController()
         {
             this.catalog = CatalogSingleton.Instance;
+            this.categories = CategoriesSingleton.Instance;
         }
         //
         // GET: /Catalog/
@@ -24,7 +26,7 @@ namespace CatalogManager.Controllers
 
         //
         // GET: /Catalog/Details/5
-        public ActionResult Index(int id)
+        public ActionResult Details(int id)
         {
             return View();
         }
@@ -43,11 +45,16 @@ namespace CatalogManager.Controllers
         {
             try
             {
-                // TODO: Add insert logic here
                 catalog.Categories.Add(new Category
                 {
                     Name = collection["Name"]
                 });
+
+                categories.Add(collection["Name"], new Category
+                {
+                    Name = collection["Name"]
+                });
+
                 return RedirectToAction("Index");
             }
             catch (Exception e)
