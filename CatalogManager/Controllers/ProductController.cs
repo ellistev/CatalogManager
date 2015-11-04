@@ -3,16 +3,31 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using CatalogManager.Models;
 
 namespace CatalogManager.Controllers
 {
     public class ProductController : Controller
     {
+
+        public Dictionary<string, Product> allProducts;
+        public Dictionary<string, Category> allCategories;
+        public Catalog catalog;
+
+        public ProductController()
+        {
+            this.catalog = CatalogSingleton.Instance;
+            this.allProducts = ProductsSingleton.Instance;
+            this.allCategories = CategoriesSingleton.Instance;
+        }
+
+
         //
         // GET: /Product/
-        public ActionResult Index()
+        public ActionResult Index(string name)
         {
-            return View();
+            Product category = allProducts[name];
+            return View(category);
         }
 
         //
@@ -24,8 +39,10 @@ namespace CatalogManager.Controllers
 
         //
         // GET: /Product/Create
-        public ActionResult Create()
+        public ActionResult Create(string parentCategoryName)
         {
+            ViewBag.PreviousUrl = System.Web.HttpContext.Current.Request.UrlReferrer;
+            ViewBag.ParentCategoryName = parentCategoryName;
             return View();
         }
 
@@ -36,11 +53,21 @@ namespace CatalogManager.Controllers
         {
             try
             {
-                // TODO: Add insert logic here
+                //get products category parent
+                var parentCategoryName = collection["ParentCategoryName"];
+                var parentCategory = allCategories[parentCategoryName];
+                catalog.Products.Add(collection["Name"], new Product
+                {
+                    Name = collection["Name"],
+                    Price = collection["Price"],
+                    Description = collection["Description"]
 
-                return RedirectToAction("Index");
+                });
+                parentCategory.Products.Add(collection["Name"]);
+
+                return Redirect(collection["PreviousUrl"]);
             }
-            catch
+            catch (Exception e)
             {
                 return View();
             }

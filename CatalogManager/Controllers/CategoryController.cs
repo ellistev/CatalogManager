@@ -35,24 +35,34 @@ namespace CatalogManager.Controllers
         }
 
         //
-        // GET: /Category/Create
-        public ActionResult Create()
+        // GET: /Catalog/Create
+        public ActionResult CreateProduct()
         {
             return View();
         }
 
         //
-        // POST: /Category/Create
+        // POST: /Catalog/Create
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public ActionResult CreateProduct(FormCollection collection)
         {
             try
             {
-                // TODO: Add insert logic here
+                //get products category parent
+                var parentCategoryName = collection["ParentCategoryName"];
+                var parentCategory = allCategories[parentCategoryName];
+                catalog.Products.Add(collection["Name"], new Product
+                {
+                    Name = collection["Name"],
+                    Price = collection["Price"],
+                    Description = collection["Description"]
+                    
+                });
+                parentCategory.Products.Add(collection["Name"]);
 
                 return RedirectToAction("Index");
             }
-            catch
+            catch (Exception e)
             {
                 return View();
             }
@@ -94,7 +104,7 @@ namespace CatalogManager.Controllers
         }
 
         //
-        // GET: /Category/Delete/5
+        // GET: /Category/Delete/Name/PageType
         public ActionResult Delete(string name, string pageType)
         {
 
@@ -102,7 +112,18 @@ namespace CatalogManager.Controllers
             {
                 allCategories.Remove(name);
                 catalog.MainCategories.Remove(name);
-            }else{
+            }
+            else if (pageType == "Category")
+            {
+                
+                foreach (KeyValuePair<string, Category> entry in allCategories)
+                {
+                    if (entry.Value.SubCategories.Contains(name))
+                    {
+                        entry.Value.SubCategories.Remove(name);
+                    }
+                }
+                allCategories.Remove(name);
                 
             }
 

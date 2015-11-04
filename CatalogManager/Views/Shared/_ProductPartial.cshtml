@@ -4,6 +4,7 @@
     <h2>@Model.Name</h2>
     <p>@Model.Description</p>
     <p>$@Model.Price</p>
-    <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301866">Edit &raquo;</a></p>
-    <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301866">Delete &raquo;</a></p>
+    @Html.ActionLink("View", "Index", "Product", new { name = @Model.Name }, null)
+    @Html.ActionLink("Edit", "Edit", "Product", new { name = @Model.Name }, null)
+    @Html.ActionLink("Delete", "Delete", "Product", new { name = @Model.Name, @pageType = @ViewData["PageType"] }, null)
 </div>

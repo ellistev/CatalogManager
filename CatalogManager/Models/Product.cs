@@ -16,7 +16,7 @@ namespace CatalogManager.Models
             get;
         }
 
-        public decimal Price
+        public string Price
         {
             set;
             get;

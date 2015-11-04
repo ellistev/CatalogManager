@@ -1,6 +1,8 @@
 ﻿@model CatalogManager.Models.Category
 @{
     ViewBag.Title = "Catalog";
+    ViewData["PageType"] = "Category";
+    ViewBag.ParentCategoryName = Model.Name;
 }
 
 
@@ -22,7 +24,8 @@
                 }
 
                 <div class="col-md-4 product">
-                    <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301866">Add Product &raquo;</a></p>
+                    @Html.ActionLink("Add Product", "Create", "Product", new { @ParentCategoryName = Model.Name }, null)
+                    
                 </div>
             }
 
@@ -34,10 +37,10 @@
 
                 foreach (string subCategory in Model.SubCategories)
                 {
-                    @Html.Partial("_SubCategoryPartial", Model.AllCategories[subCategory])
+                    @Html.Partial("_CategoryPartial", Model.AllCategories[subCategory])
                 }                
                 <div class="row subcategory">
-                    <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301866">Add Sub-category &raquo;</a></p>
+                    @Html.ActionLink("Add SubCategory", "CreateSubCategory", "Category", null, null) 
                 </div>
             }
 
