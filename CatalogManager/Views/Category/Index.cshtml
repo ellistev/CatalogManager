@@ -14,8 +14,8 @@
 </div>
 
 <div class="row">
-    <div class="col-md-8 details">
-        <div class="row">
+    <div class="col-md-8">
+        <div class="row products">
             @if (Model.Products != null)
             {
 
@@ -26,21 +26,21 @@
 
                 <div class="col-md-4 product">
                     @Html.ActionLink("Add Product", "Create", "Product", new { @ParentCategoryName = Model.Name }, null)
-                    
+
                 </div>
             }
 
 
         </div>
-        <div class="row subcategories">
+        <div class="row categories">
             @if (Model.SubCategories != null)
             {
 
                 foreach (string subCategory in Model.SubCategories)
                 {
                     @Html.Partial("_CategoryPartial", Model.AllCategories[subCategory], ViewData)
-                }                
-                <div class="row subcategory">
+                }
+                <div class="row category">
                     @Html.ActionLink("Add SubCategory", "Create", "Category", new { @ParentCategoryName = Model.Name }, null)
                 </div>
             }

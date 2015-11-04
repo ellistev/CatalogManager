@@ -12,19 +12,20 @@
     <p><a href="http://asp.net" class="btn btn-primary btn-large">Learn more &raquo;</a></p>
 </div>
 
-<div class="row">
-    <div class="col-md-12 categories">
-        @if(Model.Categories != null){
-             foreach (string category in Model.MainCategories)
-             {
-                 @Html.Partial("_CategoryPartial", Model.Categories[category], ViewData)
-             }
+<div class="row categories">
+    <div class="col-md-12">
+        @if (Model.Categories != null)
+        {
+            foreach (string category in Model.MainCategories)
+            {
+                @Html.Partial("_CategoryPartial", Model.Categories[category], ViewData)
+            }
         }
 
         <div class="row">
-            @Html.ActionLink("Add Category", "CreateCategory","Catalog", null, null) 
+            @Html.ActionLink("Add Category", "CreateCategory", "Catalog", null, null)
         </div>
     </div>
- 
+
 
 </div>
