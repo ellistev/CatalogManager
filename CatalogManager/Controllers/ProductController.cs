@@ -75,21 +75,40 @@ namespace CatalogManager.Controllers
 
         //
         // GET: /Product/Edit/5
-        public ActionResult Edit(int id)
+        public ActionResult Edit(string name, string parentCategoryName)
         {
-            return View();
+            var product = allProducts[name];
+            ViewBag.PreviousUrl = System.Web.HttpContext.Current.Request.UrlReferrer;
+            ViewBag.ParentCategoryName = parentCategoryName;
+            return View(product);
         }
 
         //
-        // POST: /Product/Edit/5
+        // POST: /Category/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(string name, FormCollection collection)
         {
             try
             {
-                // TODO: Add update logic here
+                var originalProduct = allProducts[collection["originalProductName"]];
+                originalProduct.Name = name;
+                originalProduct.Description = collection["Description"];
+                originalProduct.Price = collection["Price"];
 
-                return RedirectToAction("Index");
+                allProducts.Remove(collection["originalProductName"]);
+                allProducts.Add(name, originalProduct);
+
+                foreach (KeyValuePair<string, Category> entry in allCategories)
+                {
+                    if (entry.Value.Products.Contains(collection["originalProductName"]))
+                    {
+                        entry.Value.Products.Remove(collection["originalProductName"]);
+                        entry.Value.Products.Add(name);
+                    }
+                }
+
+                return Redirect(collection["PreviousUrl"]);
+
             }
             catch
             {

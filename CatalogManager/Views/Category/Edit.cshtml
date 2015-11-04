@@ -23,6 +23,7 @@
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Name)
                 @Html.HiddenFor(model => model.Name, new {@Name = "originalCategoryName"})
+                @Html.Hidden("ParentCategoryName", (object)ViewBag.ParentCategoryName.ToString(), new { @Name = "ParentCategoryName" })
                 @Html.Hidden("PreviousUrl", (object)ViewBag.PreviousUrl.ToString())
                 @Html.ValidationMessageFor(model => model.Name)
             </div>
