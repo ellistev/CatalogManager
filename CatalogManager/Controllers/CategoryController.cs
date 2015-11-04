@@ -98,6 +98,13 @@ namespace CatalogManager.Controllers
         public ActionResult Delete(string name, string pageType)
         {
 
+            if (pageType == "Main")
+            {
+                allCategories.Remove(name);
+                catalog.MainCategories.Remove(name);
+            }else{
+                
+            }
 
             return Redirect(System.Web.HttpContext.Current.Request.UrlReferrer.ToString());
             
