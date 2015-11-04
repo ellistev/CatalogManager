@@ -1,4 +1,5 @@
-﻿@model CatalogManager.Models.Category
+﻿@using System.Collections.Concurrent
+@model CatalogManager.Models.Category
 
 @{
     ViewBag.Title = "Edit";
@@ -21,6 +22,8 @@
             @Html.LabelFor(model => model.Name, new {@class = "control-label col-md-2"})
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Name)
+                @Html.HiddenFor(model => model.Name, new {@Name = "originalCategoryName"})
+                @Html.Hidden("PreviousUrl", (object)ViewBag.PreviousUrl.ToString())
                 @Html.ValidationMessageFor(model => model.Name)
             </div>
         </div>

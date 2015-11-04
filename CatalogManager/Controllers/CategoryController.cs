@@ -12,8 +12,9 @@ namespace CatalogManager.Controllers
 
         public Dictionary<string, Category> categories;
 
-        CategoryController()
+        public CategoryController()
         {
+            this.categories = CategoriesSingleton.Instance;
         }
         //
         // GET: /Category/
@@ -57,27 +58,26 @@ namespace CatalogManager.Controllers
         // GET: /Category/Edit/5
         public ActionResult Edit(string name)
         {
-            var category = categories["name"];
-            return View(category);
-        }
 
-        //
-        // GET: /Category/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
+            var category = categories[name];
+            ViewBag.PreviousUrl = System.Web.HttpContext.Current.Request.UrlReferrer;
+            return View(category);
         }
 
         //
         // POST: /Category/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(string name, FormCollection collection)
         {
             try
             {
-                // TODO: Add update logic here
+                var originalCategory = categories[collection["originalCategoryName"]];
+                originalCategory.Name = name;
+                categories.Remove(collection["originalCategoryName"]);
+                categories.Add(name, originalCategory);
 
-                return RedirectToAction("Index");
+                return Redirect(collection["PreviousUrl"]);
+                
             }
             catch
             {

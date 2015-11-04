@@ -16,7 +16,7 @@ namespace CatalogManager
             routes.MapRoute(
                 name: "Category",
                 url: "Category/{action}/{id}",
-                defaults: new { controller = "Category", action = "Index", id = UrlParameter.Optional }
+                defaults: new { controller = "Category", id = UrlParameter.Optional }
             );
 
             routes.MapRoute(
