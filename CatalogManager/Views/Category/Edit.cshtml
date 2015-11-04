@@ -26,8 +26,13 @@
                 @if(ViewBag.ParentCategoryName != null){
                     @Html.Hidden("ParentCategoryName", (object)ViewBag.ParentCategoryName.ToString(), new { @Name = "ParentCategoryName" })
                 }
+                @if (ViewBag.ParentCategoryName != null)
+                {
+                    @Html.Hidden("PageType", (object)ViewBag.PageType.ToString(), new { @Name = "PageType" })
+                }                
                 
                 @Html.Hidden("PreviousUrl", (object)ViewBag.PreviousUrl.ToString())
+                
                 @Html.ValidationMessageFor(model => model.Name)
             </div>
         </div>

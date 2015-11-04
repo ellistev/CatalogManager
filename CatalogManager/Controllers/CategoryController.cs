@@ -103,12 +103,12 @@ namespace CatalogManager.Controllers
 
                     foreach (KeyValuePair<string, Category> entry in allCategories)
                     {
-                        if (entry.Value.SubCategories.Contains(name))
+                        if (entry.Value.SubCategories.Contains(collection["originalCategoryName"]))
                         {
-                            entry.Value.SubCategories.Remove(name);
+                            entry.Value.SubCategories.Remove(collection["originalCategoryName"]);
+                            entry.Value.SubCategories.Add(name);
                         }
                     }
-                    allCategories.Remove(name);
 
                 }
 

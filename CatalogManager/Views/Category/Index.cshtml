@@ -1,7 +1,7 @@
 ﻿@model CatalogManager.Models.Category
 @{
     ViewBag.Title = "Catalog";
-    ViewData["PageType"] = "Category";
+    ViewBag.PageType = "Category";
     ViewBag.ParentCategoryName = Model.Name;
 }
 
@@ -38,7 +38,7 @@
 
                 foreach (string subCategory in Model.SubCategories)
                 {
-                    @Html.Partial("_CategoryPartial", Model.AllCategories[subCategory])
+                    @Html.Partial("_CategoryPartial", Model.AllCategories[subCategory], ViewData)
                 }                
                 <div class="row subcategory">
                     @Html.ActionLink("Add SubCategory", "Create", "Category", new { @ParentCategoryName = Model.Name }, null)
