@@ -7,4 +7,5 @@
     @Html.ActionLink("View", "Index", "Product", new { name = @Model.Name }, null)
     @Html.ActionLink("Edit", "Edit", "Product", new { name = @Model.Name, @ParentCategoryName = ViewBag.ParentCategoryName}, null)
     @Html.ActionLink("Delete", "Delete", "Product", new { name = @Model.Name, @pageType = @ViewData["PageType"], @ParentCategoryName = ViewBag.ParentCategoryName }, null)
+    
 </div>

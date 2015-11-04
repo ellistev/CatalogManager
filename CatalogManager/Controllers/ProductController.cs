@@ -117,10 +117,30 @@ namespace CatalogManager.Controllers
         }
 
         //
-        // GET: /Product/Delete/5
-        public ActionResult Delete(int id)
+        // GET: /Category/Delete/Name/PageType
+        public ActionResult Delete(string name, string pageType)
         {
-            return View();
+
+            if (pageType == "Main")
+            {
+                allProducts.Remove(name);
+            }
+            else if (pageType == "Category")
+            {
+
+                foreach (KeyValuePair<string, Category> entry in allCategories)
+                {
+                    if (entry.Value.Products.Contains(name))
+                    {
+                        entry.Value.Products.Remove(name);
+                    }
+                }
+                allProducts.Remove(name);
+
+            }
+
+            return Redirect(System.Web.HttpContext.Current.Request.UrlReferrer.ToString());
+
         }
 
         //
