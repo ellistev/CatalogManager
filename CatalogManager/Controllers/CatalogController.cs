@@ -24,7 +24,7 @@ namespace CatalogManager.Controllers
 
         //
         // GET: /Catalog/Details/5
-        public ActionResult Details(int id)
+        public ActionResult Index(int id)
         {
             return View();
         }
