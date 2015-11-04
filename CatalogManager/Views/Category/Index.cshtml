@@ -8,7 +8,8 @@
 
 <div class="jumbotron">
     <h1>Category: @Model.Name</h1>
-    
+    @Html.Hidden("PreviousUrl", (object)ViewBag.PreviousUrl.ToString())
+    @Html.Hidden("ParentCategoryName", @Model.Name, new { @Name = "ParentCategoryName" })
     
 </div>
 
@@ -40,7 +41,7 @@
                     @Html.Partial("_CategoryPartial", Model.AllCategories[subCategory])
                 }                
                 <div class="row subcategory">
-                    @Html.ActionLink("Add SubCategory", "CreateSubCategory", "Category", null, null) 
+                    @Html.ActionLink("Add SubCategory", "Create", "Category", new { @ParentCategoryName = Model.Name }, null)
                 </div>
             }
 

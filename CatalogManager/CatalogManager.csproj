@@ -216,7 +216,6 @@
     <Content Include="Views\Catalog\CreateCategory.cshtml" />
     <Content Include="Views\Category\Index.cshtml" />
     <Content Include="Views\Category\Edit.cshtml" />
-    <Content Include="Views\Category\CreateProduct.cshtml" />
     <Content Include="Views\Product\Index.cshtml" />
     <Content Include="Views\Product\Edit.cshtml" />
   </ItemGroup>

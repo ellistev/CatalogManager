@@ -9,7 +9,8 @@
         <h4>Category</h4>
         <hr />
         @Html.ValidationSummary(true)
-
+        @Html.Hidden("PreviousUrl", (object)ViewBag.PreviousUrl.ToString())
+        @Html.Hidden("ParentCategoryName", (object)ViewBag.ParentCategoryName.ToString(), new { @Name = "ParentCategoryName" })
 
         <div class="form-group">
             @Html.LabelFor(model => model.Name, new { @class = "control-label col-md-2" })

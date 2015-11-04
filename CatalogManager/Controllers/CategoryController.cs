@@ -23,6 +23,7 @@ namespace CatalogManager.Controllers
         // GET: /Category/
         public ActionResult Index(string name)
         {
+            ViewBag.PreviousUrl = System.Web.HttpContext.Current.Request.UrlReferrer;
             Category category = allCategories[name];
             return View(category);
         }
@@ -35,38 +36,38 @@ namespace CatalogManager.Controllers
         }
 
         //
-        // GET: /Catalog/Create
-        public ActionResult CreateProduct()
+        // GET: /Product/Create
+        public ActionResult Create(string parentCategoryName)
         {
+            ViewBag.PreviousUrl = System.Web.HttpContext.Current.Request.UrlReferrer;
+            ViewBag.ParentCategoryName = parentCategoryName;
             return View();
         }
 
         //
-        // POST: /Catalog/Create
+        // POST: /Product/Create
         [HttpPost]
-        public ActionResult CreateProduct(FormCollection collection)
+        public ActionResult Create(FormCollection collection)
         {
             try
             {
                 //get products category parent
                 var parentCategoryName = collection["ParentCategoryName"];
                 var parentCategory = allCategories[parentCategoryName];
-                catalog.Products.Add(collection["Name"], new Product
-                {
-                    Name = collection["Name"],
-                    Price = collection["Price"],
-                    Description = collection["Description"]
-                    
+                allCategories.Add(collection["Name"], new Category{
+                    Name = collection["Name"]
                 });
-                parentCategory.Products.Add(collection["Name"]);
+                parentCategory.SubCategories.Add(collection["Name"]);
 
-                return RedirectToAction("Index");
+                return Redirect(collection["PreviousUrl"]);
             }
             catch (Exception e)
             {
                 return View();
             }
         }
+
+
 
         //
         // GET: /Category/Edit/5
@@ -81,7 +82,7 @@ namespace CatalogManager.Controllers
         //
         // POST: /Category/Edit/5
         [HttpPost]
-        public ActionResult Edit(string name, FormCollection collection)
+        public ActionResult Edit(string name, string pageType, FormCollection collection)
         {
             try
             {
@@ -91,8 +92,27 @@ namespace CatalogManager.Controllers
                 allCategories.Remove(collection["originalCategoryName"]);
                 allCategories.Add(name, originalCategory);
 
-                catalog.MainCategories.Remove(collection["originalCategoryName"]);
-                catalog.MainCategories.Add(name);
+
+                if (pageType == null || pageType == "Main")
+                {
+                    catalog.MainCategories.Remove(collection["originalCategoryName"]);
+                    catalog.MainCategories.Add(name);
+                }
+                else if (pageType == "Category")
+                {
+
+                    foreach (KeyValuePair<string, Category> entry in allCategories)
+                    {
+                        if (entry.Value.SubCategories.Contains(name))
+                        {
+                            entry.Value.SubCategories.Remove(name);
+                        }
+                    }
+                    allCategories.Remove(name);
+
+                }
+
+
 
                 return Redirect(collection["PreviousUrl"]);
                 
