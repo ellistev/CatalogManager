@@ -11,9 +11,11 @@ namespace CatalogManager.Controllers
     {
 
         public Dictionary<string, Category> categories;
+        public Catalog catalog;
 
         public CategoryController()
         {
+            this.catalog = CatalogSingleton.Instance;
             this.categories = CategoriesSingleton.Instance;
         }
         //
@@ -75,6 +77,8 @@ namespace CatalogManager.Controllers
                 originalCategory.Name = name;
                 categories.Remove(collection["originalCategoryName"]);
                 categories.Add(name, originalCategory);
+                catalog.MainCategories.Remove(collection["originalCategoryName"]);
+                catalog.MainCategories.Add(name);
 
                 return Redirect(collection["PreviousUrl"]);
                 
