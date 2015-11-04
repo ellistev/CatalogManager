@@ -10,13 +10,13 @@ namespace CatalogManager.Controllers
     public class CategoryController : Controller
     {
 
-        public Dictionary<string, Category> categories;
+        public Dictionary<string, Category> allCategories;
         public Catalog catalog;
 
         public CategoryController()
         {
             this.catalog = CatalogSingleton.Instance;
-            this.categories = CategoriesSingleton.Instance;
+            this.allCategories = CategoriesSingleton.Instance;
         }
 
         //
@@ -63,7 +63,7 @@ namespace CatalogManager.Controllers
         public ActionResult Edit(string name)
         {
 
-            var category = categories[name];
+            var category = allCategories[name];
             ViewBag.PreviousUrl = System.Web.HttpContext.Current.Request.UrlReferrer;
             return View(category);
         }
@@ -75,10 +75,12 @@ namespace CatalogManager.Controllers
         {
             try
             {
-                var originalCategory = categories[collection["originalCategoryName"]];
+                var originalCategory = allCategories[collection["originalCategoryName"]];
                 originalCategory.Name = name;
-                categories.Remove(collection["originalCategoryName"]);
-                categories.Add(name, originalCategory);
+
+                allCategories.Remove(collection["originalCategoryName"]);
+                allCategories.Add(name, originalCategory);
+
                 catalog.MainCategories.Remove(collection["originalCategoryName"]);
                 catalog.MainCategories.Add(name);
 
@@ -93,9 +95,11 @@ namespace CatalogManager.Controllers
 
         //
         // GET: /Category/Delete/5
-        public ActionResult Delete(int id)
+        public ActionResult Delete(string name)
         {
-            return View();
+
+            return Redirect(System.Web.HttpContext.Current.Request.UrlReferrer.ToString());
+            
         }
 
         //
