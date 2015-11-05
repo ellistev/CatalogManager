@@ -28,13 +28,6 @@ namespace CatalogManager.Controllers
         }
 
         //
-        // GET: /Product/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
-
-        //
         // GET: /Product/Create
         public ActionResult Create(string parentCategoryName)
         {
@@ -160,21 +153,6 @@ namespace CatalogManager.Controllers
             return Redirect(System.Web.HttpContext.Current.Request.UrlReferrer.ToString());
         }
 
-        //
-        // POST: /Product/Delete/5
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add delete logic here
 
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
     }
 }

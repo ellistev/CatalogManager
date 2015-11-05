@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text;
 using System.Web.Mvc;
 using CatalogManager.Models;
 
@@ -20,12 +21,6 @@ namespace CatalogManager.Controllers
             return View(catalog);
         }
 
-        //
-        // GET: /Catalog/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
 
         //
         // GET: /Catalog/Create
@@ -88,28 +83,12 @@ namespace CatalogManager.Controllers
             }
         }
 
-        //
-        // GET: /Catalog/Delete/5
-        public ActionResult Delete(int id)
+        public ActionResult FullCatalog()
         {
-            return View();
+            return View(catalog);
         }
 
-        //
-        // POST: /Catalog/Delete/5
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add delete logic here
 
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
+
     }
 }

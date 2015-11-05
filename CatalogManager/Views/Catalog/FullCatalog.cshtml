@@ -1,0 +1,28 @@
+﻿@using CatalogManager.Helpers
+@model CatalogManager.Models.Catalog
+@{
+    ViewBag.Title = "Catalog";
+    ViewData["PageType"] = "Main";
+}
+
+
+
+<div class="row categories">
+    <div class="col-md-12">
+        <div class="row">
+            Full Catalog Output
+        </div>
+        @if (Model.Categories != null)
+        {
+            foreach (var category in Model.MainCategories)
+            {
+                @Html.Raw(category)
+                @Html.Raw(CatalogManager.Helpers.CatalogHelpers.ShowSubItems(@Model.Categories[category]))
+
+            }
+        }
+
+    </div>
+
+
+</div>
