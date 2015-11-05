@@ -158,6 +158,36 @@ namespace CatalogManager.Controllers
             return Redirect(System.Web.HttpContext.Current.Request.UrlReferrer.ToString());
         }
 
+        public void AddCategory(string newCategoryName, FormCollection collection)
+        {
+            //get products category parent
+            if (allCategories.ContainsKey(newCategoryName))
+            {
+                throw new ArgumentException();
+            }
+            var parentCategoryName = collection["ParentCategoryName"];
+            var parentCategory = allCategories[parentCategoryName];
+            allCategories.Add(collection["Name"], new Category
+            {
+                Name = collection["Name"]
+            });
+            parentCategory.SubCategories.Add(collection["Name"]);
+
+        }
+
+        public void EditCategory(string newCategoryName)
+        {
+            if (catalog.MainCategories.Contains(newCategoryName))
+            {
+                throw new ArgumentException();
+            }
+            catalog.MainCategories.Add(newCategoryName);
+            catalog.Categories.Add(newCategoryName, new Category
+            {
+                Name = newCategoryName
+            });
+        }
+
 
     }
 }
