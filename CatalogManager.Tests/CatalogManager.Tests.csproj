@@ -82,8 +82,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\CatalogControllerTests.cs" />
+    <Compile Include="Controllers\CategoryControllerTests.cs" />
+    <Compile Include="Controllers\ProductControllerTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Controllers\CatalogControllerTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App.config" />

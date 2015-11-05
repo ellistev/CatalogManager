@@ -38,15 +38,8 @@ namespace CatalogManager.Controllers
 
             try
             {
-                if (catalog.MainCategories.Contains(newCategoryName))
-                {
-                    throw new ArgumentException();
-                }
-                catalog.MainCategories.Add(newCategoryName);
-                catalog.Categories.Add(newCategoryName, new Category
-                {
-                    Name = newCategoryName
-                });
+
+                AddMainCategory(newCategoryName);
 
                 return RedirectToAction("Index");
             }catch (ArgumentException e){
@@ -59,34 +52,25 @@ namespace CatalogManager.Controllers
             }
         }
 
-        //
-        // GET: /Catalog/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
-
-        //
-        // POST: /Catalog/Edit/5
-        [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add update logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
         public ActionResult FullCatalog()
         {
             return View(catalog);
         }
+
+        public void AddMainCategory(string newCategoryName)
+        {
+            if (catalog.MainCategories.Contains(newCategoryName))
+            {
+                throw new ArgumentException();
+            }
+            catalog.MainCategories.Add(newCategoryName);
+            catalog.Categories.Add(newCategoryName, new Category
+            {
+                Name = newCategoryName
+            });
+        }
+
+        
 
 
 
