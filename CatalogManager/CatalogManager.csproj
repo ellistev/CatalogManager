@@ -166,9 +166,9 @@
     </Compile>
     <Compile Include="Helpers\HtmlHelpers.cs" />
     <Compile Include="Models\Catalog.cs" />
-    <Compile Include="Models\CatalogSingleton.cs" />
-    <Compile Include="Models\ProductsSingleton.cs" />
-    <Compile Include="Models\CategoriesSingleton.cs" />
+    <Compile Include="DataPersistance\CatalogSingleton.cs" />
+    <Compile Include="DataPersistance\ProductsSingleton.cs" />
+    <Compile Include="DataPersistance\CategoriesSingleton.cs" />
     <Compile Include="Models\Category.cs" />
     <Compile Include="Models\Product.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
