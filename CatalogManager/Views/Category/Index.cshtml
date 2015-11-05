@@ -14,7 +14,7 @@
 </div>
 
 <div class="row">
-    <div class="col-md-8">
+    <div class="col-md-12">
         <div class="row">
             Products
         </div>
@@ -26,7 +26,7 @@
                     @Html.Partial("_ProductPartial", Model.AllProducts[product])
                 }
 
-                <div class="col-md-4 product">
+                <div class="col-md-3 product noborder">
                     @Html.ActionLink("Add Product", "Create", "Product", new {@ParentCategoryName = Model.Name}, new {@class = "btn btn-primary btn-large"})
 
                 </div>
@@ -41,7 +41,7 @@
                 {
                     @Html.Partial("_CategoryPartial", Model.AllCategories[subCategory], ViewData)
                 }
-                <div class="row category">
+                <div class="row category noborder">
                     @Html.ActionLink("Add SubCategory", "Create", "Category", new {@ParentCategoryName = Model.Name}, new {@class = "btn btn-primary btn-large"})
                 </div>
             }

@@ -1,10 +1,10 @@
 ﻿@model CatalogManager.Models.Product
 
-<div class="col-md-4 product">
+<div class="col-md-3 product">
     <h2>Product: @Html.ActionLink(@Model.Name, "Index", "Product", new { name = @Model.Name }, null)</h2>
 
     
-    @Html.ActionLink("Edit", "Edit", "Product", new {name = @Model.Name, ViewBag.ParentCategoryName}, new {@class = "btn btn-primary btn-large"})
+    @Html.ActionLink("Update", "Edit", "Product", new {name = @Model.Name, ViewBag.ParentCategoryName}, new {@class = "btn btn-primary btn-large"})
     @Html.ActionLink("Delete", "Delete", "Product", new {name = @Model.Name, @pageType = @ViewData["PageType"], ViewBag.ParentCategoryName}, new {@class = "btn btn-primary btn-large"})
 
 </div>
