@@ -23,6 +23,7 @@ namespace CatalogManager.Controllers
         public ActionResult Index(string name)
         {
             var category = allProducts[name];
+            ViewBag.PreviousUrl = System.Web.HttpContext.Current.Request.UrlReferrer;
             return View(category);
         }
 

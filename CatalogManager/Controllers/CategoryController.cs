@@ -46,9 +46,14 @@ namespace CatalogManager.Controllers
         [HttpPost]
         public ActionResult Create(FormCollection collection)
         {
+            var newCategoryName = collection["Name"];
             try
             {
                 //get products category parent
+                if (allCategories[newCategoryName] != null)
+                {
+                    throw new ArgumentException();
+                }
                 var parentCategoryName = collection["ParentCategoryName"];
                 var parentCategory = allCategories[parentCategoryName];
                 allCategories.Add(collection["Name"], new Category
@@ -58,6 +63,10 @@ namespace CatalogManager.Controllers
                 parentCategory.SubCategories.Add(collection["Name"]);
 
                 return Redirect(collection["PreviousUrl"]);
+            }catch (ArgumentException e)
+            {
+                ModelState.AddModelError("", "Category Already Exists, Must Be Unique: " + newCategoryName);
+                return View();
             }
             catch (Exception e)
             {

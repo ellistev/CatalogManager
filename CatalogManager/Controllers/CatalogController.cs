@@ -39,15 +39,24 @@ namespace CatalogManager.Controllers
         [HttpPost]
         public ActionResult CreateCategory(FormCollection collection)
         {
+            var newCategoryName = collection["Name"];
+
             try
             {
-                catalog.MainCategories.Add(collection["Name"]);
-                catalog.Categories.Add(collection["Name"], new Category
+                if (catalog.MainCategories.Contains(newCategoryName))
                 {
-                    Name = collection["Name"]
+                    throw new ArgumentException();
+                }
+                catalog.MainCategories.Add(newCategoryName);
+                catalog.Categories.Add(newCategoryName, new Category
+                {
+                    Name = newCategoryName
                 });
 
                 return RedirectToAction("Index");
+            }catch (ArgumentException e){
+                ModelState.AddModelError("", "Category Already Exists, Must Be Unique: " + newCategoryName);
+                return View();
             }
             catch (Exception e)
             {
