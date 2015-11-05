@@ -12,12 +12,14 @@ namespace CatalogManager.Controllers.Tests
     [TestClass()]
     public class ProductControllerTests
     {
+        private ProductController controller;
+        
         [TestMethod()]
         public void Sould_Add_New_Product()
         {
             string newCategoryToAdd = "newCategoryToAdd";
 
-            ProductController controller = new ProductController();
+            controller = new ProductController();
 
             controller.allCategories.Add("parent", new Category
             {
@@ -36,11 +38,12 @@ namespace CatalogManager.Controllers.Tests
         }
 
         [TestMethod()]
+        [ExpectedException(typeof(ArgumentException), "A Duplicate Entry is Not Allowed.")]
         public void Sould_Not_Add_Duplicate_Product()
         {
             //add the first category
             string newCategoryToAdd = "parent";
-            ProductController controller = new ProductController();
+            controller = new ProductController();
 
             controller.allCategories.Add("parent", new Category
             {
@@ -88,7 +91,7 @@ namespace CatalogManager.Controllers.Tests
             string newProductName = "newName";
 
             // Arrange
-            ProductController controller = new ProductController();
+            controller = new ProductController();
 
             FormCollection collection = new FormCollection();
 
@@ -110,15 +113,14 @@ namespace CatalogManager.Controllers.Tests
             controller.EditProduct(newProductName, collection);
 
             // Assert
-            Assert.AreEqual(controller.allProducts.Count, 1);
+            Assert.AreEqual(controller.allProducts.Count, 2);
         }
 
         [TestMethod()]
         public void Sould_Not_Edit_Duplicate_Category()
         {
-            //add the first category
             string newProductToAdd = "otherName";
-            ProductController controller = new ProductController();
+            controller = new ProductController();
             FormCollection collection = new FormCollection();
 
             controller.allProducts.Add("otherName", new Product
@@ -134,7 +136,6 @@ namespace CatalogManager.Controllers.Tests
                 Name = "originalName",
                 Description = "description",
                 Price = 1.23
-
             });
 
             collection.Add("ParentCategoryName", "parent");
@@ -147,7 +148,6 @@ namespace CatalogManager.Controllers.Tests
 
             try
             {
-                //attempt to add again the same category
                 controller.EditProduct(newProductToAdd, collection);
             }
             catch (ArgumentException ex)
@@ -155,7 +155,6 @@ namespace CatalogManager.Controllers.Tests
                 expectedException = ex;
             }
 
-            // Assert
             Assert.IsNotNull(expectedException);
             Assert.AreEqual(controller.allProducts.Count, 2);
         }
