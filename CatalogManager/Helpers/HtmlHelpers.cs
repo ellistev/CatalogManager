@@ -22,7 +22,7 @@ namespace CatalogManager.Helpers
                  {
                      var product = _object.AllProducts[subItem];
                      output.Append("<li>");
-                     output.Append(product.Name);
+                     output.Append(product.Name + " - " + product.Description + " - $" + product.Price);
                      output.Append("</li>");
                  }
                  output.Append("</ul>");
