@@ -4,10 +4,8 @@ using System.ComponentModel.DataAnnotations;
 
 namespace CatalogManager.Models
 {
-    public class Category
+    public class Category : Catalog
     {
-        public Dictionary<string, Category> AllCategories;
-        public Dictionary<string, Product> AllProducts;
 
         [Required]
         public String Name { get; set; }
@@ -19,8 +17,6 @@ namespace CatalogManager.Models
         {
             Products = new List<string>();
             SubCategories = new List<string>();
-            AllCategories = CategoriesSingleton.Instance;
-            AllProducts = ProductsSingleton.Instance;
         }
     }
 }

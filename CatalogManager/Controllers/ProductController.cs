@@ -130,7 +130,7 @@ namespace CatalogManager.Controllers
             }
             var parentCategoryName = collection["ParentCategoryName"];
             var parentCategory = allCategories[parentCategoryName];
-            catalog.Products.Add(newProductName, new Product
+            catalog.AllProducts.Add(newProductName, new Product
             {
                 Name = newProductName,
                 Price = Double.Parse(collection["Price"]),

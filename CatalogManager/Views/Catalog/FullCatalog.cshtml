@@ -12,12 +12,12 @@
         <div class="row">
             Full Catalog Output
         </div>
-        @if (Model.Categories != null)
+        @if (Model.AllCategories != null)
         {
             foreach (var category in Model.MainCategories)
             {
                 @Html.Raw(category)
-                @Html.Raw(CatalogManager.Helpers.CatalogHelpers.ShowSubItems(@Model.Categories[category]))
+                @Html.Raw(CatalogManager.Helpers.CatalogHelpers.ShowSubItems(@Model.AllCategories[category]))
 
             }
         }

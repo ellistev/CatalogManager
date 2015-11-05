@@ -4,16 +4,16 @@ namespace CatalogManager.Models
 {
     public class Catalog
     {
-        public Dictionary<string, Category> Categories;
+        public Dictionary<string, Category> AllCategories;
         //public List<Category> Categories;
         public List<string> MainCategories;
-        public Dictionary<string, Product> Products;
+        public Dictionary<string, Product> AllProducts;
 
         public Catalog()
         {
             MainCategories = new List<string>();
-            Categories = CategoriesSingleton.Instance;
-            Products = ProductsSingleton.Instance;
+            AllCategories = CategoriesSingleton.Instance;
+            AllProducts = ProductsSingleton.Instance;
         }
     }
 }

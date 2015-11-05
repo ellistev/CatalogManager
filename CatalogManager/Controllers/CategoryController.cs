@@ -182,7 +182,7 @@ namespace CatalogManager.Controllers
                 throw new ArgumentException();
             }
             catalog.MainCategories.Add(newCategoryName);
-            catalog.Categories.Add(newCategoryName, new Category
+            catalog.AllCategories.Add(newCategoryName, new Category
             {
                 Name = newCategoryName
             });
