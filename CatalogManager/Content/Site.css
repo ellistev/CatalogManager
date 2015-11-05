@@ -47,3 +47,7 @@ input[type="checkbox"].input-validation-error { border: 0 none; }
 .noborder{
     border: none;
 }
+
+.headerimage {
+    margin-top: 10px;
+}
