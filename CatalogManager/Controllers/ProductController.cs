@@ -41,29 +41,15 @@ namespace CatalogManager.Controllers
         [HttpPost]
         public ActionResult Create(FormCollection collection)
         {
-            var newProductName = collection["Name"];
             try
             {
-                //get products category parent
-                if (allProducts.ContainsKey(newProductName))
-                {
-                    throw new ArgumentException();
-                }
-                var parentCategoryName = collection["ParentCategoryName"];
-                var parentCategory = allCategories[parentCategoryName];
-                catalog.Products.Add(newProductName, new Product
-                {
-                    Name = newProductName,
-                    Price = Double.Parse(collection["Price"]),
-                    Description = collection["Description"]
-                });
-                parentCategory.Products.Add(newProductName);
-
+                AddProduct(collection);
+                
                 return Redirect(collection["PreviousUrl"]);
             }
             catch (ArgumentException e)
             {
-                ModelState.AddModelError("", "Product Already Exists, Must Be Unique: " + newProductName);
+                ModelState.AddModelError("", "Product Already Exists, Must Be Unique: " + collection["Name"]);
                 ViewBag.PreviousUrl = collection["PreviousUrl"];
                 ViewBag.ParentCategoryName = collection["ParentCategoryName"];
                 return View();
@@ -93,26 +79,7 @@ namespace CatalogManager.Controllers
         {
             try
             {
-                if (collection["originalProductName"] != name && allProducts.ContainsKey(name))
-                {
-                    throw new ArgumentException();
-                }
-                var originalProduct = allProducts[collection["originalProductName"]];
-                originalProduct.Name = name;
-                originalProduct.Description = collection["Description"];
-                originalProduct.Price = Double.Parse(collection["Price"]);
-
-                allProducts.Remove(collection["originalProductName"]);
-                allProducts.Add(name, originalProduct);
-
-                foreach (var entry in allCategories)
-                {
-                    if (entry.Value.Products.Contains(collection["originalProductName"]))
-                    {
-                        entry.Value.Products.Remove(collection["originalProductName"]);
-                        entry.Value.Products.Add(name);
-                    }
-                }
+                EditProduct(name, collection);
 
                 return Redirect(collection["PreviousUrl"]);
             }catch (ArgumentException e)
@@ -151,6 +118,50 @@ namespace CatalogManager.Controllers
             }
 
             return Redirect(System.Web.HttpContext.Current.Request.UrlReferrer.ToString());
+        }
+
+        public void AddProduct(FormCollection collection)
+        {
+            var newProductName = collection["Name"];
+
+            if (allProducts.ContainsKey(newProductName))
+            {
+                throw new ArgumentException();
+            }
+            var parentCategoryName = collection["ParentCategoryName"];
+            var parentCategory = allCategories[parentCategoryName];
+            catalog.Products.Add(newProductName, new Product
+            {
+                Name = newProductName,
+                Price = Double.Parse(collection["Price"]),
+                Description = collection["Description"]
+            });
+            parentCategory.Products.Add(newProductName);
+
+        }
+
+        public void EditProduct(string newProductName, FormCollection collection)
+        {
+            if (collection["originalProductName"] != newProductName && allProducts.ContainsKey(newProductName))
+            {
+                throw new ArgumentException();
+            }
+            var originalProduct = allProducts[collection["originalProductName"]];
+            originalProduct.Name = newProductName;
+            originalProduct.Description = collection["Description"];
+            originalProduct.Price = Double.Parse(collection["Price"]);
+
+            allProducts.Remove(collection["originalProductName"]);
+            allProducts.Add(newProductName, originalProduct);
+
+            foreach (var entry in allCategories)
+            {
+                if (entry.Value.Products.Contains(collection["originalProductName"]))
+                {
+                    entry.Value.Products.Remove(collection["originalProductName"]);
+                    entry.Value.Products.Add(newProductName);
+                }
+            }
         }
 
 

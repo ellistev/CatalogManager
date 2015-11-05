@@ -14,6 +14,7 @@ namespace CatalogManager.Controllers.Tests
     public class CategoryControllerTests
     {
         [TestMethod()]
+        [ExpectedException(typeof(ArgumentException), "A Duplicate Entry is Not Allowed.")]
         public void Sould_Add_New_Category()
         {
             string newCategoryToAdd = "newCategoryToAdd";
