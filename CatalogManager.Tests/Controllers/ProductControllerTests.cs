@@ -83,34 +83,72 @@ namespace CatalogManager.Controllers.Tests
         }
 
         [TestMethod()]
-        public void Sould_Add_Edit_Product()
+        public void Sould_Edit_Product()
         {
-            string newCategoryToAdd = "newCategoryToAdd";
+            string newProductName = "newName";
 
             // Arrange
-            CategoryController controller = new CategoryController();
+            ProductController controller = new ProductController();
 
-            controller.EditCategory(newCategoryToAdd);
+            FormCollection collection = new FormCollection();
+
+            controller.allProducts.Add("originalName", new Product
+            {
+                Name = "originalName",
+                Description = "description",
+                Price = 1.23
+
+            });
+
+            collection.Add("ParentCategoryName", "parent");
+            collection.Add("Name", "productname");
+            collection.Add("Description", "description");
+            collection.Add("Price", "1.23");
+            collection.Add("originalProductName", "originalName");
+            
+
+            controller.EditProduct(newProductName, collection);
 
             // Assert
-            Assert.AreEqual(controller.catalog.MainCategories.Count, 1);
+            Assert.AreEqual(controller.allProducts.Count, 1);
         }
 
         [TestMethod()]
-        [ExpectedException(typeof(ArgumentException), "A Duplicate Entry is Not Allowed.")]
         public void Sould_Not_Edit_Duplicate_Category()
         {
             //add the first category
-            string newCategoryToAdd = "newCategoryToAdd";
-            CategoryController controller = new CategoryController();
-            controller.EditCategory(newCategoryToAdd);
+            string newProductToAdd = "otherName";
+            ProductController controller = new ProductController();
+            FormCollection collection = new FormCollection();
+
+            controller.allProducts.Add("otherName", new Product
+            {
+                Name = "otherName",
+                Description = "description",
+                Price = 1.23
+
+            });
+
+            controller.allProducts.Add("originalName", new Product
+            {
+                Name = "originalName",
+                Description = "description",
+                Price = 1.23
+
+            });
+
+            collection.Add("ParentCategoryName", "parent");
+            collection.Add("Name", "productname");
+            collection.Add("Description", "description");
+            collection.Add("Price", "1.23");
+            collection.Add("originalProductName", "originalName");
 
             ArgumentException expectedException = null;
 
             try
             {
                 //attempt to add again the same category
-                controller.EditCategory(newCategoryToAdd);
+                controller.EditProduct(newProductToAdd, collection);
             }
             catch (ArgumentException ex)
             {
@@ -119,7 +157,7 @@ namespace CatalogManager.Controllers.Tests
 
             // Assert
             Assert.IsNotNull(expectedException);
-            Assert.AreEqual(controller.catalog.MainCategories.Count, 1);
+            Assert.AreEqual(controller.allProducts.Count, 2);
         }
     }
 }
