@@ -54,7 +54,7 @@ namespace CatalogManager.Controllers
                 catalog.Products.Add(newProductName, new Product
                 {
                     Name = newProductName,
-                    Price = collection["Price"],
+                    Price = Double.Parse(collection["Price"]),
                     Description = collection["Description"]
                 });
                 parentCategory.Products.Add(newProductName);
@@ -100,7 +100,7 @@ namespace CatalogManager.Controllers
                 var originalProduct = allProducts[collection["originalProductName"]];
                 originalProduct.Name = name;
                 originalProduct.Description = collection["Description"];
-                originalProduct.Price = collection["Price"];
+                originalProduct.Price = Double.Parse(collection["Price"]);
 
                 allProducts.Remove(collection["originalProductName"]);
                 allProducts.Add(name, originalProduct);

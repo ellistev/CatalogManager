@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace CatalogManager.Models
 {
@@ -7,7 +8,10 @@ namespace CatalogManager.Models
     {
         public Dictionary<string, Category> AllCategories;
         public Dictionary<string, Product> AllProducts;
-        public String Name;
+
+        [Required]
+        public String Name { get; set; }
+
         public List<string> Products;
         public List<string> SubCategories;
 
