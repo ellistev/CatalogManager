@@ -211,7 +211,6 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Shared\_CategoryPartial.cshtml" />
     <Content Include="Views\Shared\_ProductPartial.cshtml" />
-    <Content Include="Views\Shared\_SubCategoryPartial.cshtml" />
     <Content Include="Views\Product\Create.cshtml" />
     <Content Include="Views\Category\Create.cshtml" />
     <Content Include="Views\Catalog\CreateCategory.cshtml" />

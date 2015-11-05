@@ -11,15 +11,20 @@
 <body>
 <div class="navbar navbar-inverse navbar-fixed-top">
     <div class="container">
-        <div class="navbar-header">
 
-            <div class="col-md-10">
+            <div class="col-md-3">
                 @Html.ActionLink("Steve's Catalog Manager", "Index", "Catalog", null, new {@class = "navbar-brand"})
+            </div>
+            <div class="col-md-4">
+                @Html.ActionLink("Back To Catalog Top", "Index", "Catalog", null, new { @class = "navbar-brand" })
+            </div>
+            <div class="col-md-4">
+                @Html.ActionLink("Output Full Catalog", "FullCatalog", "Catalog", null, new { @class = "navbar-brand" })
             </div>
             <div class="col-md-1">
                 <img src="http://images.enstarz.com/data/images/full/22437/best-buy.png" alt="Sample Image" width="50px" height="30px"/>
             </div>
-        </div>
+      
     </div>
 </div>
 <div class="container body-content">
@@ -27,7 +32,7 @@
     <hr/>
     <footer>
 
-        <div class="col-md-10">
+        <div class="col-md-11">
             <p>&copy; @DateTime.Now.Year - Steve's Catalog Manager</p>
         </div>
         <div class="col-md-1">

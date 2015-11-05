@@ -44,7 +44,7 @@
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    <a href=@ViewBag.PreviousUrl.ToString()>Previous Page</a>
 </div>
 
 @section Scripts {
