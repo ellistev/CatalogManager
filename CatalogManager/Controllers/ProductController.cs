@@ -48,23 +48,37 @@ namespace CatalogManager.Controllers
         [HttpPost]
         public ActionResult Create(FormCollection collection)
         {
+            var newProductName = collection["Name"];
             try
             {
                 //get products category parent
+                if (allProducts.ContainsKey(newProductName))
+                {
+                    throw new ArgumentException();
+                }
                 var parentCategoryName = collection["ParentCategoryName"];
                 var parentCategory = allCategories[parentCategoryName];
-                catalog.Products.Add(collection["Name"], new Product
+                catalog.Products.Add(newProductName, new Product
                 {
-                    Name = collection["Name"],
+                    Name = newProductName,
                     Price = collection["Price"],
                     Description = collection["Description"]
                 });
-                parentCategory.Products.Add(collection["Name"]);
+                parentCategory.Products.Add(newProductName);
 
                 return Redirect(collection["PreviousUrl"]);
             }
+            catch (ArgumentException e)
+            {
+                ModelState.AddModelError("", "Product Already Exists, Must Be Unique: " + newProductName);
+                ViewBag.PreviousUrl = collection["PreviousUrl"];
+                ViewBag.ParentCategoryName = collection["ParentCategoryName"];
+                return View();
+            }
             catch (Exception e)
             {
+                ViewBag.PreviousUrl = collection["PreviousUrl"];
+                ViewBag.ParentCategoryName = collection["ParentCategoryName"];
                 return View();
             }
         }
@@ -86,6 +100,10 @@ namespace CatalogManager.Controllers
         {
             try
             {
+                if (collection["originalProductName"] != name && allProducts.ContainsKey(name))
+                {
+                    throw new ArgumentException();
+                }
                 var originalProduct = allProducts[collection["originalProductName"]];
                 originalProduct.Name = name;
                 originalProduct.Description = collection["Description"];
@@ -104,9 +122,17 @@ namespace CatalogManager.Controllers
                 }
 
                 return Redirect(collection["PreviousUrl"]);
-            }
-            catch
+            }catch (ArgumentException e)
             {
+                ModelState.AddModelError("", "Product Already Exists, Must Be Unique: " + name);
+                ViewBag.PreviousUrl = collection["PreviousUrl"];
+                ViewBag.ParentCategoryName = collection["ParentCategoryName"];
+                return View();
+            }
+            catch (Exception e)
+            {
+                ViewBag.PreviousUrl = collection["PreviousUrl"];
+                ViewBag.ParentCategoryName = collection["ParentCategoryName"];
                 return View();
             }
         }

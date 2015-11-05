@@ -50,7 +50,7 @@ namespace CatalogManager.Controllers
             try
             {
                 //get products category parent
-                if (allCategories[newCategoryName] != null)
+                if (allCategories.ContainsKey(newCategoryName))
                 {
                     throw new ArgumentException();
                 }
@@ -66,10 +66,14 @@ namespace CatalogManager.Controllers
             }catch (ArgumentException e)
             {
                 ModelState.AddModelError("", "Category Already Exists, Must Be Unique: " + newCategoryName);
+                ViewBag.PreviousUrl = collection["PreviousUrl"];
+                ViewBag.ParentCategoryName = collection["ParentCategoryName"];
                 return View();
             }
             catch (Exception e)
             {
+                ViewBag.PreviousUrl = collection["PreviousUrl"];
+                ViewBag.ParentCategoryName = collection["ParentCategoryName"];
                 return View();
             }
         }
@@ -90,6 +94,11 @@ namespace CatalogManager.Controllers
         {
             try
             {
+
+                if (collection["originalCategoryName"] != name && allCategories.ContainsKey(name))
+                {
+                    throw new ArgumentException();
+                }
                 var originalCategory = allCategories[collection["originalCategoryName"]];
                 originalCategory.Name = name;
 
@@ -116,9 +125,17 @@ namespace CatalogManager.Controllers
 
 
                 return Redirect(collection["PreviousUrl"]);
-            }
-            catch
+            }catch (ArgumentException e)
             {
+                ModelState.AddModelError("", "Category Already Exists, Must Be Unique: " + name);
+                ViewBag.PreviousUrl = collection["PreviousUrl"];
+                ViewBag.ParentCategoryName = collection["ParentCategoryName"];
+                return View();
+            }
+            catch (Exception e)
+            {
+                ViewBag.PreviousUrl = collection["PreviousUrl"];
+                ViewBag.ParentCategoryName = collection["ParentCategoryName"];
                 return View();
             }
         }
