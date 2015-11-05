@@ -14,12 +14,12 @@ namespace CatalogManager.Controllers.Tests
     public class CategoryControllerTests
     {
         [TestMethod()]
-        [ExpectedException(typeof(ArgumentException), "A Duplicate Entry is Not Allowed.")]
         public void Sould_Add_New_Category()
         {
             string newCategoryToAdd = "newCategoryToAdd";
             
             CategoryController controller = new CategoryController();
+            controller.allCategories.Clear();
 
             controller.allCategories.Add("parent", new Category
             {
@@ -36,12 +36,12 @@ namespace CatalogManager.Controllers.Tests
         }
 
         [TestMethod()]
-        [ExpectedException(typeof(ArgumentException), "A Duplicate Entry is Not Allowed.")]
         public void Sould_Not_Add_Duplicate_Category()
         {
             //add the first category
             string newCategoryToAdd = "parent";
             CategoryController controller = new CategoryController();
+            controller.allCategories.Clear();
 
             controller.allCategories.Add("parent", new Category
             {
@@ -71,12 +71,14 @@ namespace CatalogManager.Controllers.Tests
         }
 
         [TestMethod()]
+        [ExpectedException(typeof(ArgumentException), "A Duplicate Entry is Not Allowed.")]
         public void Sould_Add_Edit_Category()
         {
             string newCategoryToAdd = "newCategoryToAdd";
 
             // Arrange
             CategoryController controller = new CategoryController();
+            controller.allCategories.Clear();
 
             controller.EditCategory(newCategoryToAdd);
 
@@ -91,6 +93,8 @@ namespace CatalogManager.Controllers.Tests
             //add the first category
             string newCategoryToAdd = "newCategoryToAdd";
             CategoryController controller = new CategoryController();
+            controller.allCategories.Clear();
+
             controller.EditCategory(newCategoryToAdd);
 
             ArgumentException expectedException = null;

@@ -20,6 +20,8 @@ namespace CatalogManager.Controllers.Tests
             string newCategoryToAdd = "newCategoryToAdd";
 
             controller = new ProductController();
+            controller.allProducts.Clear();
+            controller.allCategories.Clear();
 
             controller.allCategories.Add("parent", new Category
             {
@@ -38,12 +40,13 @@ namespace CatalogManager.Controllers.Tests
         }
 
         [TestMethod()]
-        [ExpectedException(typeof(ArgumentException), "A Duplicate Entry is Not Allowed.")]
         public void Sould_Not_Add_Duplicate_Product()
         {
             //add the first category
             string newCategoryToAdd = "parent";
             controller = new ProductController();
+            controller.allProducts.Clear();
+            controller.allCategories.Clear();
 
             controller.allCategories.Add("parent", new Category
             {
@@ -92,6 +95,8 @@ namespace CatalogManager.Controllers.Tests
 
             // Arrange
             controller = new ProductController();
+            controller.allProducts.Clear();
+            controller.allCategories.Clear();
 
             FormCollection collection = new FormCollection();
 
@@ -113,7 +118,7 @@ namespace CatalogManager.Controllers.Tests
             controller.EditProduct(newProductName, collection);
 
             // Assert
-            Assert.AreEqual(controller.allProducts.Count, 2);
+            Assert.AreEqual(controller.allProducts.Count, 1);
         }
 
         [TestMethod()]
@@ -121,6 +126,9 @@ namespace CatalogManager.Controllers.Tests
         {
             string newProductToAdd = "otherName";
             controller = new ProductController();
+            controller.allProducts.Clear();
+            controller.allCategories.Clear();
+
             FormCollection collection = new FormCollection();
 
             controller.allProducts.Add("otherName", new Product
