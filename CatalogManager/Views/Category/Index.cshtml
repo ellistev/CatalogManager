@@ -15,37 +15,45 @@
 
 <div class="row">
     <div class="col-md-12">
-        <div class="row">
-            Products
-        </div>
         <div class="row products">
-            @if (Model.Products != null)
-            {
-                foreach (var product in Model.Products)
+            <div class="row products noborder">
+                Products
+            </div>
+            <div class="row">
+
+                @if (Model.Products != null)
                 {
-                    @Html.Partial("_ProductPartial", Model.AllProducts[product])
+                    foreach (var product in Model.Products)
+                    {
+                        @Html.Partial("_ProductPartial", Model.AllProducts[product])
+                    }
+
+                    <div class="col-md-3 product noborder">
+                        @Html.ActionLink("Add Product", "Create", "Product", new { @ParentCategoryName = Model.Name }, new { @class = "btn btn-primary btn-large" })
+
+                    </div>
                 }
-
-                <div class="col-md-3 product noborder">
-                    @Html.ActionLink("Add Product", "Create", "Product", new {@ParentCategoryName = Model.Name}, new {@class = "btn btn-primary btn-large"})
-
-                </div>
-            }
+                
+            </div>
 
 
         </div>
         <div class="row categories">
-            @if (Model.SubCategories != null)
-            {
-                foreach (var subCategory in Model.SubCategories)
+            <div class="row products noborder">
+                SubCategories
+            </div>
+            <div class="row">
+                @if (Model.SubCategories != null)
                 {
-                    @Html.Partial("_CategoryPartial", Model.AllCategories[subCategory], ViewData)
+                    foreach (var subCategory in Model.SubCategories)
+                    {
+                        @Html.Partial("_CategoryPartial", Model.AllCategories[subCategory], ViewData)
+                    }
+                    <div class="row category noborder">
+                        @Html.ActionLink("Add SubCategory", "Create", "Category", new { @ParentCategoryName = Model.Name }, new { @class = "btn btn-primary btn-large" })
+                    </div>
                 }
-                <div class="row category noborder">
-                    @Html.ActionLink("Add SubCategory", "Create", "Category", new {@ParentCategoryName = Model.Name}, new {@class = "btn btn-primary btn-large"})
-                </div>
-            }
-
+            </div>
 
         </div>
     </div>
