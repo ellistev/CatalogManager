@@ -35,6 +35,7 @@ namespace CatalogManager.Controllers.Tests
         }
 
         [TestMethod()]
+        [ExpectedException(typeof(ArgumentException), "A Duplicate Entry is Not Allowed.")]
         public void Sould_Not_Add_Duplicate_Category()
         {
             //add the first category
@@ -83,6 +84,7 @@ namespace CatalogManager.Controllers.Tests
         }
 
         [TestMethod()]
+        [ExpectedException(typeof(ArgumentException), "A Duplicate Entry is Not Allowed.")]
         public void Sould_Not_Edit_Duplicate_Category()
         {
             //add the first category
